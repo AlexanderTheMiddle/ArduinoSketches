@@ -1,0 +1,109 @@
+//libraries
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <Adafruit_I2CDevice.h>
+
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+
+// Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
+#define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+
+//globals
+
+int pins[5] = {14, 6, 7, 15, 5};
+//order            pins
+//  2               6
+//1 5 3          A4 5 7
+//  4              A5
+
+#define rotorPin A7
+
+#define leftPin pins[0]
+#define upPin pins[1]
+#define rightPin pins[2]
+#define downPin pins[3]
+#define okPin pins[4]
+
+/*
+#define PLAYER_HEIGHT   14
+#define PLAYER_WIDTH    16
+
+static const unsigned char PROGMEM playerBit[] = { 
+  B00000011, B10000000,
+  B00000100, B01000000,
+  B00000100, B01000000,
+  B00000100, B01000000,
+  B00000011, B10000000,
+  B00000001, B00000000,
+  B00000111, B11000000,
+  B00001011, B10100000,
+  B00010011, B10010000,
+  B00000011, B10000000,
+  B00000011, B10000000,
+  B00000010, B10000000,
+  B00000010, B10000000,
+  B00000010, B10000000
+  };
+*/
+
+/*
+#define PLAYER_HEIGHT   14
+#define PLAYER_WIDTH    16
+static const unsigned char PROGMEM playerBit[] = {
+ B00011000,  B00000000, 
+ B00111100,  B00000000, 
+ B00111100,  B00000000, 
+ B00100100,  B00000000, 
+ B00100100,  B00000000, 
+ B10011000,  B00000000, 
+ B10111100,  B00000000, 
+ B11011010,  B10000000, 
+ B11011011,  B01111000, 
+ B11011000,  B10000000, 
+ B00100100,  B00000000, 
+ B00100100,  B00000000, 
+ B01100110,  B00000000, 
+ B01100110,  B00000000,
+};
+
+*/
+
+#define PLAYER_HEIGHT   10
+#define PLAYER_WIDTH    24
+
+static const unsigned char PROGMEM playerBit[][2000] = {
+  {
+ B00000000,  B00111111,  B10000000, 
+ B00000000,  B01111111,  B00000000, 
+ B00000000,  B11111110,  B00000000, 
+ B00000001,  B11111000,  B01110000, 
+ B00011011,  B11000000,  B10000000, 
+ B11111111,  B11111111,  B00000000, 
+ B00000011,  B11110000,  B00000000, 
+ B00000000,  B00000000,  B00000000, 
+ B00000000,  B00000000,  B00000000, 
+ B00000000,  B00000000,  B00000000, 
+},
+{
+   B00000000,  B00000000,  B00000000, 
+ B00000000,  B00000000,  B00000000, 
+ B00000000,  B00000000,  B00000000, 
+ B00011000,  B00000000,  B00000000, 
+ B11111111,  B11111111,  B00000000, 
+ B00000011,  B11110000,  B11110000, 
+ B00000000,  B11111100,  B00000000, 
+ B00000000,  B00111111,  B00000000, 
+ B00000000,  B00000111,  B10000000, 
+ B00000000,  B00000000,  B00000000, 
+}
+};
+
+
+
+#define LOGO_HEIGHT   PLAYER_HEIGHT
+#define LOGO_WIDTH    PLAYER_WIDTH
